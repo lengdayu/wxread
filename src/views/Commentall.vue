@@ -33,7 +33,7 @@
                     <span class="commentdetails" style="color:#aaa" >{{commentarr[i].details}}</span>
                     <!-- <a  v-show="true" class="statea" href="">修改</a> -->
                         <!-- <textarea class="text_input" name="" id="user_comment_area" cols="30" rows="10"></textarea>
-                        <span @click="comment_send" class="comment_send">发表评论</span> -->
+                        <span @click="comment_send" class="comment_send">发表评论</span> -->`
                     <a  style="display:none"  @click="del($event)" class="statea data-eachpid" :data-eachpid='item.pid' >删除</a>
                 </div>
             </div>
@@ -160,6 +160,7 @@ export default {
                     console.log(res);
                     alert('发表成功')
                     this.$router.go(0);
+                    this.get_user_commnet_pid();
                 })
             }else {
                 alert('不能发表内容为空的评论');
