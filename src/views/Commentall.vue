@@ -31,9 +31,6 @@
                 <div  v-for="(item,i) of commentarr" :key='i' :data-eachpid='item.pid'>
                     <span class="commentuname" style="color:#ddd" >{{commentarr[i].uname}}</span>
                     <span class="commentdetails" style="color:#aaa" >{{commentarr[i].details}}</span>
-                    <!-- <a  v-show="true" class="statea" href="">修改</a> -->
-                        <!-- <textarea class="text_input" name="" id="user_comment_area" cols="30" rows="10"></textarea>
-                        <span @click="comment_send" class="comment_send">发表评论</span> -->`
                     <a  style="display:none"  @click="del($event)" class="statea data-eachpid" :data-eachpid='item.pid' >删除</a>
                 </div>
             </div>
@@ -109,16 +106,6 @@ export default {
                 //获取到评论的元素
                 let comment=document.getElementsByClassName('data-eachpid');
                 // console.log(comment);
-
-
-                // //把所有装在元素属性里的pid 复制到新数组里
-                // let pid=[];
-                // for(var i=0;i<comment.length;i++){
-                //     pid[i]=comment[i].getAttribute('data-eachpid');
-                // }
-                // console.log(pid);
-
-
                 // 再依次将pid和user_pid两个数组比较，有一个子元素相同就说明是当前用户的评论
                 for(var i=0;i<comment.length;i++){
                     for(var k=0;k<this.user_pid.length;k++){
@@ -131,14 +118,6 @@ export default {
                         }
                     }
                 }
-
-
-                // let pid=comment.Map((item)=>{
-                //    let test= item.getAttribute('data-eachpid')
-                //    console.log(test);
-                // })
-
-                // if(this.comment.pid==res.data.)
             })
         },
         //发送评论
@@ -237,10 +216,10 @@ export default {
                 let arr=res.data.result;
                 // console.log(arr);
                 this.commentarr=arr;
-            })
             //确保页面加载时，先请求到评论的id
             //再请执行验证函数
             this.get_user_commnet_pid();
+            })
         },
         //1F书籍信息
         loadbname(){
@@ -270,7 +249,7 @@ export default {
     watch:{
         bid(){
             this.loadcomment();
-        }
+        },
     },
     computed:{
         ...mapState(['stateinput']),

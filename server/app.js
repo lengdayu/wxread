@@ -309,7 +309,7 @@ server.get('/comment/getcommentid',(req,res)=>{
   let sql="select pid from comment where uid=?"
   pool.query(sql,[uid],(err,result)=>{
     if(err) throw err;
-    console.log(result);
+    // console.log(result);
     result.length ? res.send({code:200,result,msg:'请求成功'}) : res.send({code:201,msg:'请求失败'})
   })
 })
@@ -320,7 +320,7 @@ server.delete('/comment/delcomment',(req,res)=>{
   let sql="delete  from comment where pid=?"
   pool.query(sql,[pid],(err,result)=>{
     if(err) throw err;
-    console.log(result);
+    // console.log(result);
     result.affectedRows ? res.send({code:200,result,msg:'请求成功'}) : res.send({code:201,msg:'请求失败'})
   })
 })
