@@ -62,7 +62,8 @@ export default {
                 url:'/shujiaadd',
                 data:data
             }).then(res=>{
-                alert('添加成功')
+                this.$message.success('添加成功');
+                // alert('添加成功')
             })
         },
         //回到主页

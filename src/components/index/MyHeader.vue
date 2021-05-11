@@ -6,8 +6,9 @@
             <button>墨水屏版</button><span class="navBar_b"></span>
             <button>手机屏</button><span class="navBar_b"></span>
             <button>微信听书</button><span class="navBar_b"></span>
-            <button class="denglu" @click='login' v-show="!statelogin">登录</button><span v-show="statelogin" class="navBar_b"></span>
-            <img v-if="statelogin" @click="loginoutshow" :src="`https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/userimage/${userinfo.avatar}`" alt="" >
+            <button  @click='login' v-show="!statelogin">登录</button><span v-show="!statelogin" class="navBar_b"></span>
+            <button  @click='regist' v-show="!statelogin">注册</button><span v-show="statelogin" class="navBar_b"></span>
+            <img v-show="statelogin" @click="loginoutshow" :src="`https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/userimage/${userinfo.avatar}`" alt="" >
             <span v-show="out" @click="loginout" class="userloginout">退出</span>
         </div>
         <span class="log" v-show="!stateinput"><img src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/home/search_header_logo.02fc8d01.png"></span>
@@ -55,8 +56,7 @@ export default {
       this.out=false;
       this.changelogintrue(false);
       this.changeuserinfo(arrary);
-      window.sessionStorage.setItem('islogin',false);
-      window.sessionStorage.setItem('userinfo',arrary);
+      sessionStorage.clear();
     },
     //点击显示退出按钮
     loginoutshow(){
@@ -84,6 +84,9 @@ export default {
       this.changeinputfalse();
       let search=document.getElementsByClassName("search_input" )[0];
       search.style="margin-top:48px"
+    },
+    regist(){
+      this.$router.push({name:'Regist'});     
     },
     login(){
       this.$router.push({name:'Login'});

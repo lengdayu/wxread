@@ -28,18 +28,23 @@
             <!-- 评论块 -->
             <div class="bookcomment">
                 <h2 style="color:#fff">精彩点评</h2>
-                <div  v-for="(item,i) of commentarr" :key='i' :data-eachpid='item.pid'>
-                    <span class="commentuname" style="color:#ddd" >{{commentarr[i].uname}}</span>
+                <div  v-for="(item,i) of commentarr" :key='i' >
+                    <span class="commentuname" style="color:#0097ff" >{{commentarr[i].uname}}</span>
                     <span class="commentdetails" style="color:#aaa" >{{commentarr[i].details}}</span>
-                    <a  style="display:none"  @click="del($event)" class="statea data-eachpid" :data-eachpid='item.pid' >删除</a>
+                    <el-button style="display:none"  @click="del($event)" class=" data-eachpid" :data-eachpid='item.pid' :plain="true" type="danger" icon="el-icon-delete">删除</el-button>
+
                 </div>
             </div>
-
+z
             <!-- 用户评论发表块 -->
             <div class="text_area">
                 <h2 style="color:#fff">评论栏</h2>  
                 <textarea class="text_input" name="" id="user_comment_area" cols="30" rows="10"></textarea>
-                <span @click="comment_send" class="comment_send">发表评论</span>
+                <div class="send_button_container">
+                    <el-button class="comment_send" @click="comment_send" type="success">发表评论</el-button>
+                </div>
+
+                <!-- <span @click="comment_send" class="comment_send">发表评论</span> -->
             </div>
 
             <!-- 页脚 -->
@@ -82,15 +87,27 @@ export default {
         //删除评论
         del(event){
             let nowpid=event.target.getAttribute('data-eachpid');
+            console.log(nowpid);
             this.axios.delete('/comment/delcomment',{
                 params:{nowpid}
             }).then(res=>{
                 // console.log(res);
                 if(res.data.code==201){
-                    alert('删除失败')
+                    const h = this.$createElement;
+                         this.$notify({
+                        title: '错误',
+                        message: h('i', { style: 'color: red;'}, '删除失败')
+                    });
                 }else if(res.data.code==200){
-                    alert('删除成功')
-                    this.$router.go(0);
+                    const h = this.$createElement;
+                         this.$notify({
+                        title: '成功',
+                        message: h('i', { style: 'color: red;'}, '删除成功')
+                    });
+                    setTimeout(()=>{
+                        this.$router.go(0);
+                    },1000)
+                    
                 }
             })
         },
@@ -123,7 +140,7 @@ export default {
         //发送评论
         comment_send(){
             let user_comment_area=document.getElementById('user_comment_area');
-            console.log(user_comment_area.value);
+            // console.log(user_comment_area.value);
             let data=this.qs.stringify({
                 bid:this.bid,
                 uname:this.userinfo.uname,
@@ -136,14 +153,23 @@ export default {
                     url:'/comment/send',
                     data
                 }).then(res=>{
-                    console.log(res);
-                    alert('发表成功')
-                    this.$router.go(0);
-                    this.get_user_commnet_pid();
+                    // console.log(res);
+                    user_comment_area.value='';
+                    this.$message({
+                        message: '发表成功',
+                        type: 'success'
+                    });
+                    setTimeout(()=>{
+                        this.$router.go(0);
+                        this.get_user_commnet_pid();
+                    },1000)
+
                 })
             }else {
-                alert('不能发表内容为空的评论');
-                user_comment_area.value='';
+                this.$message({
+                    message: '不能发表内容为空的评论',
+                    type: 'warning'
+                });
             }
 
         },
@@ -259,28 +285,19 @@ export default {
 }
 </script>
 <style scoped>
-.statea{
-    cursor: pointer;
-    margin: 5px 10px;
-    /* border: 1px solid #aaa; */
-    width: 60px;
-    text-align: center;
-    text-shadow:1px 1px 1px #333;
-    border-radius: 5px; 
-    border:1px solid #b42323;
-    box-shadow: 0 1px 2px #e99494 inset,0 -1px 0 #954b4b inset,0 -2px 3px #e99494 inset;
-    background: #d53939;
-    color: #fff;
+.send_button_container{
+    width: 80%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.data-eachpid{
+    width: 70px;
+    padding:5px;
 }
 .comment_send{
-    display: block;
     margin: 20px 0;
-    margin-left: 84%;
-    color: rgb(170, 170, 170);
-    cursor: pointer;
-    border: 1px solid gray ;
-    width: 64px;
-    background-color: rgba(238,240,244,.1);
+    margin-left: 88%;
 }
 .text_input{
     background-color: rgba(238,240,244,.1);

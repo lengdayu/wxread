@@ -63,13 +63,28 @@ export default {
         }
     },
     methods:{
+        //封装el侧边消息框
+        redmse(text){
+            const h = this.$createElement;
+            this.$notify({
+            title: '错误',
+            message: h('i', { style: 'color: red'}, text)
+            });
+        },
+        gremse(text){
+            const h = this.$createElement;
+            this.$notify({
+            title: '成功',
+            message: h('i', { style: 'color: green'}, text)
+            });
+        },
         //用户名不为空，重名检查
         uname_check(){
             var uname=document.getElementsByClassName('uname')[0];
             // console.log('失焦了');
             // console.log(this.uname)
             if(!this.uname){
-                alert('用户名不能为空');
+                this.redmse('用户名不能为空')
                 this.uname_check_right=false;
                 this.uname_check_err=true;
             }else{
@@ -82,7 +97,7 @@ export default {
                     }else if(checkstate==201){
                         this.uname_check_right=false;
                         this.uname_check_err=true;
-                        alert('用户名已被注册');
+                        this.redmse('用户名已被注册')
                         this.uname='';
                     }
                 })
@@ -90,6 +105,7 @@ export default {
         },
         //用户密码检查
         upwd_check(){
+            this.reupwd_check_right=false;
             let reg=/^[^0-9][a-zA-Z0-9_]+$/;
             let state=reg.test(this.upwd);
             // console.log(state);
@@ -102,7 +118,7 @@ export default {
             }else{
                 this.upwd_check_right=false;
                 this.upwd_check_err=true;
-                alert('用户密码必须由数字及字母组成，且必须以字母开头')  
+                this.redmse('用户密码必须由数字及字母组成，且必须以字母开头');
                 this.upwd='';           
             }
         },
@@ -118,7 +134,7 @@ export default {
                     //同时密码框状态也改为初始状态 
                     this.upwd_check_right=false;
                     this.upwd_check_err=false;
-                    alert('两次密码输入不一致');
+                    this.redmse('两次密码输入不一致');
                     this.upwd='';
                     this.reupwd='';                
                 }
@@ -134,7 +150,7 @@ export default {
             }else{
                 this.phone_check_right=false;
                 this.phone_check_err=true;
-                alert('手机号格式错误');
+                this.redmse('手机号格式错误');
                 this.phone='';
             }
         },
@@ -148,7 +164,7 @@ export default {
             }else{
                 this.email_check_right=false;
                 this.email_check_err=true;
-                alert('邮箱格式错误');
+                this.redmse('邮箱格式错误');
                 this.email='';
             }
         },
@@ -170,12 +186,12 @@ export default {
                     let state=res.data.code;
                     // console.log(state);
                     if(state==200){
-                        alert('注册成功');
+                        this.gremse('注册成功');
                         this.$router.push({name:'Login'});
                     }
                 });
             }else{
-                alert('信息不能为空')
+                this.redmse('信息不能为空');
             }
         },
     },

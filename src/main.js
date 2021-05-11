@@ -17,7 +17,10 @@ Vue.component('myheader-detail',MyheaderDetail);
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
-
+// //封装$message到全局不受this影响
+// import {Message} from 'element-ui'
+// Vue.use(Message);
+// Vue.prototype.$message=Message;
 
 Vue.config.productionTip = false
 

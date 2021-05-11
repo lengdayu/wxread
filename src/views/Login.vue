@@ -9,7 +9,7 @@
 
                 <span class="input_title">用户密码：</span><input  v-model.trim="upwd" type="password" placeholder="请输入用户密码" maxlength="10">
               
-                <button @click="login" class="button_regist">点击登录</button>
+                <el-button @click="login" class="button_regist">点击登录</el-button>
                 <a @click="routertoregist" class="router_regist" href="">未注册？点击注册</a>
 
             </div> 
@@ -42,6 +42,7 @@ export default {
         ...mapActions(['changeuid']),
         ...mapActions(['changeuserinfo']),
         login(){
+            let vm=this;
             if(this.uname && this.upwd){
                 this.axios.get('/login',{
                     params:{uname:this.uname,upwd:this.upwd}
@@ -58,17 +59,31 @@ export default {
                         //在浏览器中存储状态
                         this.changelogintrue(true);
                         window.sessionStorage.setItem('islogin',true);
-                        alert('登录成功');
+                        const h = this.$createElement;
+                            this.$notify({
+                            title: '成功',
+                            message: h('i', { style: 'color: green;'}, '登录成功')
+                        });
                         // console.log(this.userinfo);
                         this.$router.push({name:'Home'});
                     }else if(loginstate==201){
-                        alert('用户名或密码错误');
+                        const h = this.$createElement;
+                            this.$notify({
+                            title: '错误',
+                            message: h('i', { style: 'color: red;'}, '登录失败')
+                        });
+                        // this.$message.err('用户名或密码错误');
                         this.uname='';
                         this.upwd='';
                     }
                 })
             }else{
-                alert('信息不能为空');
+            const h = this.$createElement;
+                this.$notify({
+                title: '错误',
+                message: h('i', { style: 'color: red;'}, '信息不能为空')
+                });
+            //    this.$message.err('信息不能为空');
             }
         },
     },
