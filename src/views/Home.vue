@@ -44,7 +44,7 @@ export default {
     getarrtopall(sendval){
       console.log('已取到子组件的值')
       this.arrtopall=sendval;
-      console.log(this.arrtopall);
+      // console.log(this.arrtopall);
     }
   }
 }
