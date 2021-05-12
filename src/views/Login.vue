@@ -42,41 +42,72 @@ export default {
         ...mapActions(['changeuid']),
         ...mapActions(['changeuserinfo']),
         login(){
-            let vm=this;
             if(this.uname && this.upwd){
-                this.axios.get('/login',{
+                //先判读是否是管理员账号，如果是直接跳转管理页面
+                this.axios.get('/adminlogin',{
                     params:{uname:this.uname,upwd:this.upwd}
                 }).then(res=>{
-                    // console.log(res);
-                    let loginstate=res.data.code;
-                    if(loginstate==200){
-                        //更新vuex中的用户登录状态，用户id，用户信息
-                        this.changelogintrue(true);
-                        let arr=res.data.result[0];
-                        // this.changeuid(arr.uid);
-                        this.changeuserinfo(arr);
-                        window.sessionStorage.setItem('userinfo',JSON.stringify(arr))
-                        //在浏览器中存储状态
-                        this.changelogintrue(true);
-                        window.sessionStorage.setItem('islogin',true);
-                        const h = this.$createElement;
-                            this.$notify({
-                            title: '成功',
-                            message: h('i', { style: 'color: green;'}, '登录成功')
-                        });
-                        // console.log(this.userinfo);
-                        this.$router.push({name:'Home'});
-                    }else if(loginstate==201){
+                    // console.log(res.data);
+                    //如果密码正确能得到UID
+                    if(res.data.code==200){
+                        //*********管理员登录************/
+                        //如果UID=1，那么跳转管理员页面
+                        if(res.data.result[0].uid==1){
+                            this.changeuserinfo(res.data.result[0]);
+                            window.sessionStorage.setItem('userinfo',JSON.stringify(res.data.result[0]))
+                            this.$router.push({name:'Admin'}); 
+                        }
+
+                        //*********普通用户登录************/
+                        //如果不是则普通用户正常登录,跳转普通页面
+                        else if(res.data.result[0].uid!=1){
+                        //如果不是则正常登录跳转首页
+                        this.axios.get('/login',{
+                            params:{uname:this.uname,upwd:this.upwd}
+                        }).then(res=>{
+                            // console.log(res);
+                            let loginstate=res.data.code;
+                            if(loginstate==200){
+                                //更新vuex中的用户登录状态，用户id，用户信息
+                                this.changelogintrue(true);
+                                let arr=res.data.result[0];
+                                // this.changeuid(arr.uid);
+                                this.changeuserinfo(arr);
+                                window.sessionStorage.setItem('userinfo',JSON.stringify(arr))
+                                //在浏览器中存储状态
+                                this.changelogintrue(true);
+                                window.sessionStorage.setItem('islogin',true);
+                                const h = this.$createElement;
+                                    this.$notify({
+                                    title: '成功',
+                                    message: h('i', { style: 'color: green;'}, '登录成功')
+                                });
+                                // console.log(this.userinfo);
+                                this.$router.push({name:'Home'});
+                            }else if(loginstate==201){
+                                const h = this.$createElement;
+                                    this.$notify({
+                                    title: '错误',
+                                    message: h('i', { style: 'color: red;'}, '登录失败')
+                                });
+                                // this.$message.err('用户名或密码错误');
+                                    this.uname='';
+                                    this.upwd='';
+                                }
+                            })
+                        }
+                    }else {
                         const h = this.$createElement;
                             this.$notify({
                             title: '错误',
-                            message: h('i', { style: 'color: red;'}, '登录失败')
+                             message: h('i', { style: 'color: red;'}, '登录失败')
                         });
-                        // this.$message.err('用户名或密码错误');
                         this.uname='';
                         this.upwd='';
                     }
                 })
+
+
             }else{
             const h = this.$createElement;
                 this.$notify({

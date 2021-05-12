@@ -31,11 +31,10 @@
                 <div  v-for="(item,i) of commentarr" :key='i' >
                     <span class="commentuname" style="color:#0097ff" >{{commentarr[i].uname}}</span>
                     <span class="commentdetails" style="color:#aaa" >{{commentarr[i].details}}</span>
-                    <el-button style="display:none"  @click="del($event)" class=" data-eachpid" :data-eachpid='item.pid' :plain="true" type="danger" icon="el-icon-delete">删除</el-button>
+                    <button style="display:none"  @click="del($event)" class=" data-eachpid" :data-eachpid='item.pid' :plain="true" type="danger" icon="el-icon-delete">删除</button>
 
                 </div>
             </div>
-z
             <!-- 用户评论发表块 -->
             <div class="text_area">
                 <h2 style="color:#fff">评论栏</h2>  
@@ -87,7 +86,7 @@ export default {
         //删除评论
         del(event){
             let nowpid=event.target.getAttribute('data-eachpid');
-            console.log(nowpid);
+            // console.log(nowpid);
             this.axios.delete('/comment/delcomment',{
                 params:{nowpid}
             }).then(res=>{
@@ -294,6 +293,12 @@ export default {
 .data-eachpid{
     width: 70px;
     padding:5px;
+    margin-top: 5px;
+    background-color: #f56c6c;
+    border: none;
+    border-radius: 5px;
+    /* box-shadow: inset 1px 1px 1px 1px azure ; */
+    color: #eee;
 }
 .comment_send{
     margin: 20px 0;

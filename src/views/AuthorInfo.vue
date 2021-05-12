@@ -3,7 +3,7 @@
     <div>
       <myheader-detail></myheader-detail>
         <!-- 上面第一个div -->
-        <div class="container">
+        <div v-show="!stateinput" class="container">
             <div>
                 <h1>{{author}}</h1>
             </div>
@@ -14,7 +14,7 @@
             </div>
         </div>
         <!-- 下面整个div -->
-      <div class="bookAbout" v-for="(item,i) of arr" :key="i">
+      <div v-show="!stateinput" class="bookAbout" v-for="(item,i) of arr" :key="i">
         <!-- 第一个开始 -->
         <div class="bookList" >
             <div class="bookImg">
@@ -37,6 +37,7 @@
 </template>
 <script>
 import MyheaderDetail from '../components/top/MyheaderDetail.vue';
+import { mapState } from 'vuex';
 export default {
   components: { MyheaderDetail },
   data(){
@@ -78,6 +79,9 @@ export default {
   },
   mounted(){
     this.loadPage();
+  },
+  computed:{
+    ...mapState(['stateinput'])
   }
 }
 </script>
@@ -118,7 +122,13 @@ img{
   border: solid hsla(0, 0%, 100%, 0.05);
   border-width: 1px 0 0;
 }
+.bookAbout{
+  max-width: 1220px;
+  margin: 0 auto;
+}
 .container {
+  max-width: 1220px;
+  margin: 0 auto;
   padding:  10px 20px;
 }
 

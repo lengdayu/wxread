@@ -9,23 +9,23 @@
                 <span class="input_title">用户名：</span><input @blur="uname_check" v-model.trim="uname" type="text" placeholder="请输入用户名" maxlength="30">
                 <!-- 用户名查重通过与失败的图片提示 -->
                 <img v-show="uname_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img v-show="uname_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF%20(1).png" alt="">
+                <img v-show="uname_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
                 <!-- 第一次密码检查 -->
                 <span class="input_title">用户密码：</span><input @blur="upwd_check" v-model.trim="upwd" type="password" placeholder="请输入用户密码" maxlength="10">
                 <img class="upwd_check" v-show="upwd_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="upwd_check" v-show="upwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF%20(1).png" alt=""> 
+                <img class="upwd_check" v-show="upwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt=""> 
                 
                 <span class="input_title">再输一次：</span><input @blur="reupwd_check" v-model.trim="reupwd" type="password" placeholder="请重复输入用户密码" maxlength="10">
                 <img class="reupwd_check" v-show="reupwd_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="reupwd_check" v-show="reupwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF%20(1).png" alt="">
+                <img class="reupwd_check" v-show="reupwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
                 
                 <span class="input_title">手机号：</span><input @blur="phone_check" v-model.trim="phone" type="text" placeholder="请输入手机号" >
                 <img class="phone_check" v-show="phone_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="phone_check" v-show="phone_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF%20(1).png" alt="">
+                <img class="phone_check" v-show="phone_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
                 
                 <span class="input_title">邮箱：</span><input @blur="email_check" v-model.trim="email" type="text" placeholder="请输入邮箱" class="email_input">
                 <img class="email_check" v-show="email_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="email_check" v-show="email_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF%20(1).png" alt="">
+                <img class="email_check" v-show="email_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
                 
                 <!-- 路由跳转待实现 -->
                 <button @click="regist" class="button_regist">点击注册</button>

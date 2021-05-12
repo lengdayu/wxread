@@ -324,3 +324,64 @@ server.delete('/comment/delcomment',(req,res)=>{
     result.affectedRows ? res.send({code:200,result,msg:'请求成功'}) : res.send({code:201,msg:'请求失败'})
   })
 })
+
+
+//*********************管理员页面****************************
+//管理员账号登录检查
+server.get('/adminlogin',(req,res)=>{
+  let uname=req.query.uname;
+  let upwd=req.query.upwd;
+  let sql='select * from user where uname=? and upwd=?';
+  pool.query(sql,[uname,upwd],(err,result)=>{
+    if(err) throw err;
+    result.length ? res.send({code:200,result,msg:'请求成功'}) : res.send({code:201,msg:'请求失败'})
+  })
+})
+//请求页面初载数据
+server.get('/admin',(req,res)=>{
+  let uid=req.query.uid;
+  let sql="select * from comment"
+  if(uid==1){
+    pool.query(sql,(err,result)=>{
+      if(err) throw err;
+      result.length ? res.send({code:200,result,msg:'请求成功'}) : res.send({code:201,msg:'请求失败'})
+    })
+  }
+})
+//管理员删除评论
+server.delete('/admin/comdel',(req,res)=>{
+  let pid=req.query.pid;
+  let sql="delete from comment where pid=?"
+  pool.query(sql,[pid],(err,result)=>{
+    if(err) throw err;
+    result.affectedRows ? res.send({code:200,msg:'删除成功'}) : res.send({code:201,msg:'删除失败'})
+  })
+})
+//根据检索查询评论
+server.get('/admin/searchall',(req,res)=>{
+  let uname=req.query.uname;
+  let uid=req.query.uid;
+  let sql='select * from comment where uname=? and uid=?'
+  pool.query(sql,[uname,uid],(err,result)=>{
+    if(err) throw err ;
+    result.length ? res.send({code:200,result,msg:"请求成功"}) : res.send({code:201,msg:"请求失败"})
+  })
+})
+//根据用户名查询评论
+server.get('/admin/searchuname',(req,res)=>{
+  let uname=req.query.uname;
+  let sql="select * from comment where uname=?";
+  pool.query(sql,[uname],(err,result)=>{
+    if(err) throw err;
+    result.length ? res.send({code:200,result,msg:"请求成功"}) : res.send({code:201,msg:"请求失败"})
+  })
+})
+//根据用户ID查询评论
+server.get('/admin/searchuid',(req,res)=>{
+  let uid=req.query.uid;
+  let sql="select * from comment where uid=?";
+  pool.query(sql,[uid],(err,result)=>{
+    if(err) throw err;
+    result.length ? res.send({code:200,result,msg:"请求成功"}) : res.send({code:201,msg:"请求失败"})
+  })
+})

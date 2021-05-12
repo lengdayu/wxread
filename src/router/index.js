@@ -8,10 +8,16 @@ import TopDetails from '../views/TopDetails'
 import BookDetails from '../views/BookDetails'
 import ReadDetails from '../views/ReadDetails'
 import Commentall from '../views/Commentall'
+import Admin from '../views/Admin'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "Admin" */ '../views/Admin.vue')
+  },
   {
     path: '/commentall',
     name: 'Commentall',
