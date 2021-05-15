@@ -74,7 +74,7 @@ export default {
         },
         //搜索框检索
         search(){
-            //当输入用户名和用户ID一起查询时
+            //当不输入用户名和用户ID时
             if(this.iuname==''&&this.iuid==''){
                 this.redmse('内容不能为空');
                 //当输入用户名和用户ID一起查询时
@@ -101,7 +101,7 @@ export default {
                 this.axios.get('/admin/searchuname',{
                     params:{uname}
                 }).then(res=>{
-                    // console.log(res.data);
+                    console.log(res.data);
                     this.iuname="";this.iuid='';
                     if(res.data.code==200){
                         this.comarr=res.data.result;
@@ -262,11 +262,13 @@ export default {
     display: flex;
     align-items: center;
 }
-.loginout{
+/* .loginout{
     margin:0 0 10px 270px;
-}
+} */
 .header{
+    display: inline-block;
     color: #4ca4ff;
+    margin-right: 10px;
 }
 .container{
     max-width: 1223px;

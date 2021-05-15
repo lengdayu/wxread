@@ -13,8 +13,11 @@
             <span>手机版</span><span>|</span>
             <span>微信听书</span><span>|</span>
             <span @click='login' v-show="!statelogin">登录</span><span v-show="!statelogin">|</span><span v-show="!statelogin" @click="routerRegist">注册</span>
-            <img class="userpic" v-show="statelogin" @click="loginoutShow" :src="`https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/userimage/${userinfo.avatar}`" alt="">
-            <span v-show="out" @click="loginout" class="userloginout">退出</span>
+            <div class="loginout_container">
+                <img class="userpic" v-show="statelogin" @click="loginoutShow" :src="`https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/userimage/${userinfo.avatar}`" alt="">
+                <span v-show="out" @click="loginout" class="userloginout">退出</span>
+            </div>
+
         </div>
         <div v-show="stateinput" class="search_result">  
             <div class="result" v-for="(item,i) of searchresult" :key='i'>
@@ -58,6 +61,10 @@ export default {
             this.changelogintrue(false);
             this.changeuserinfo(arrary);
             sessionStorage.clear();
+            this.$message({
+                message: '退出成功',
+                type: 'success'
+            });
         },
         //点击用户图片显示退出按钮
         loginoutShow(){
@@ -102,6 +109,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .x{
   /* display: block; */
   width: 50px;height: 50px;
@@ -147,18 +155,19 @@ export default {
   color: #fff;
 }
 .userloginout{
-    position: absolute;
-    top: 60px;right: 325px;
+    margin-top: 20px;
     border: 1px solid black;
     border-radius: 5px;
     color: #fff;
     /* background-color: gray; */
 }
 .userpic{
-    display: inline-block;
+    display: block;
     width:30px;
     border-radius: 20px;
+    margin-top: 10px;
     margin-left: 18px;
+    margin-bottom: 10px;
     cursor: pointer;
 }
 .headdatails span{
@@ -169,7 +178,12 @@ export default {
     color: grey;
     cursor: pointer;
 }
+.headdatails{
+    display: flex;
+    justify-content: space-between;
+}
 .nav{
+    position: relative;
     display: flex;
     align-items: center;
 }

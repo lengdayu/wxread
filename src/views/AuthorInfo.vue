@@ -109,12 +109,12 @@ span{
 }
 img{    
     height: 100%;
-    margin-left: 30px;
+    /* margin-left: 0px; */
 }
 .bookList{
     display: flex;
     height: 180px;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .bottom {
@@ -123,11 +123,11 @@ img{
   border-width: 1px 0 0;
 }
 .bookAbout{
-  max-width: 1220px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 .container {
-  max-width: 1220px;
+  max-width: 1120px;
   margin: 0 auto;
   padding:  10px 20px;
 }

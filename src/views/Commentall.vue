@@ -297,6 +297,7 @@ export default {
     background-color: #f56c6c;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
     /* box-shadow: inset 1px 1px 1px 1px azure ; */
     color: #eee;
 }

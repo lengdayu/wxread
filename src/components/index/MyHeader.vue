@@ -57,6 +57,10 @@ export default {
       this.changelogintrue(false);
       this.changeuserinfo(arrary);
       sessionStorage.clear();
+      this.$message({
+          message: '退出成功',
+          type: 'success'
+      });
     },
     //点击显示退出按钮
     loginoutshow(){

@@ -9,23 +9,23 @@
                 <span class="input_title">用户名：</span><input @blur="uname_check" v-model.trim="uname" type="text" placeholder="请输入用户名" maxlength="30">
                 <!-- 用户名查重通过与失败的图片提示 -->
                 <img v-show="uname_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img v-show="uname_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
+                <img v-show="uname_check_err"  src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" style="margin-top:5px;width: 26px ;height: 26px;" alt="">
                 <!-- 第一次密码检查 -->
                 <span class="input_title">用户密码：</span><input @blur="upwd_check" v-model.trim="upwd" type="password" placeholder="请输入用户密码" maxlength="10">
                 <img class="upwd_check" v-show="upwd_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="upwd_check" v-show="upwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt=""> 
+                <img class="upwd_check upwd_checka" v-show="upwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" style=" width: 26px ;height: 26px;" alt=""> 
                 
                 <span class="input_title">再输一次：</span><input @blur="reupwd_check" v-model.trim="reupwd" type="password" placeholder="请重复输入用户密码" maxlength="10">
                 <img class="reupwd_check" v-show="reupwd_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="reupwd_check" v-show="reupwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
+                <img class="reupwd_check reupwd_checka" v-show="reupwd_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" style="width: 26px ;height: 26px;" alt="">
                 
                 <span class="input_title">手机号：</span><input @blur="phone_check" v-model.trim="phone" type="text" placeholder="请输入手机号" >
                 <img class="phone_check" v-show="phone_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="phone_check" v-show="phone_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
+                <img class="phone_check phone_checka" v-show="phone_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" style="width: 26px ;height: 26px;" alt="">
                 
                 <span class="input_title">邮箱：</span><input @blur="email_check" v-model.trim="email" type="text" placeholder="请输入邮箱" class="email_input">
                 <img class="email_check" v-show="email_check_right" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E6%AD%A3%E7%A1%AE.png" alt="">
-                <img class="email_check" v-show="email_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" alt="">
+                <img class="email_check email_checka" v-show="email_check_err" src="https://readpic-1305756746.cos.ap-shanghai.myqcloud.com/state/%E9%94%99%E8%AF%AF2.png" style="width: 26px ;height: 26px;" alt="">
                 
                 <!-- 路由跳转待实现 -->
                 <button @click="regist" class="button_regist">点击注册</button>
@@ -201,6 +201,10 @@ export default {
 }
 </script>
 <style scoped>
+.email_checka{top: 212px !important;}
+.phone_checka{ top:160px !important}
+.reupwd_checka{ top: 108px !important}
+.upwd_checka{top: 55px !important}
 .email_input{margin-left: 15px;}
 .email_check{top: 205px;}
 .phone_check{top:152px}
