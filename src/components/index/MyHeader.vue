@@ -98,14 +98,16 @@ export default {
   },
   watch:{
     searchinput(newval,olval){
-      if(newval){
-        this.axios.get('/bookdetails',{
-          params:{searchinput:'%'+newval+'%'}
-        }).then(res=>{
-          this.searchresult=res.data.result;
-          // console.log(this.searchresult);
-        })
-      }
+      setTimeout(() => {
+        if(newval){
+          this.axios.get('/bookdetails',{
+            params:{searchinput:'%'+newval+'%'}
+          }).then(res=>{
+            this.searchresult=res.data.result;
+            // console.log(this.searchresult);
+          })
+        }
+      }, 500);
      }
   }
 }

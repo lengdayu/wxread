@@ -87,17 +87,19 @@ export default {
         del(event){
             let nowpid=event.target.getAttribute('data-eachpid');
             // console.log(nowpid);
-            this.axios.delete('/comment/delcomment',{
+            this.$http({
+                method:'delete',
+                url:'/comment/delcomment',
                 params:{nowpid}
             }).then(res=>{
-                // console.log(res);
-                if(res.data.code==201){
+                console.log(res);
+                if(res.code==201){
                     const h = this.$createElement;
                          this.$notify({
                         title: '错误',
                         message: h('i', { style: 'color: red;'}, '删除失败')
                     });
-                }else if(res.data.code==200){
+                }else if(res.code==200){
                     const h = this.$createElement;
                          this.$notify({
                         title: '成功',
