@@ -212,7 +212,6 @@ export default {
         ...mapState(['stateinput']),
         ...mapState(['statelogin']),
     }
-
 }
 </script>
 <style scoped>
