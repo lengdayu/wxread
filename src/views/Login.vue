@@ -27,6 +27,7 @@
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'
+import  router  from '../router/index'
 export default {
     data() {
         return {

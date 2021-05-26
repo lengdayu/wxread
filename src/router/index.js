@@ -77,6 +77,20 @@ const router = new VueRouter({
     return { x: 0, y: 0 };
   },
 });
+router.beforeEach((to, from, next) => {
+  let statelogin = sessionStorage.getItem("statelogin"); //验证登录状态
+  if (statelogin) {
+    //判断是否登录
+    next();
+  } else {
+    if (to.path !== "/login") {
+      alert("请先登录");
+      next({ path: "/login" });
+    } else {
+      next();
+    }
+  }
+});
 
 // router.beforeEach((to, from, next) => {});
 
