@@ -24,13 +24,13 @@ Vue.use(ElementUI);
 
 // 全局前置守卫
 router.beforeEach((to, from, next) => {
-  let statelogin = sessionStorage.getItem("statelogin"); //验证登录状态
+  let statelogin = sessionStorage.getItem("userinfo"); //验证登录状态
+  // console.log(statelogin);
   if (statelogin) {
     //判断是否登录
     next();
   } else {
     if (to.path !== "/login") {
-      alert("请先登录");
       next({ path: "/login" });
     } else {
       next();
