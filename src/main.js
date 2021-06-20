@@ -26,7 +26,7 @@ Vue.use(ElementUI);
 router.beforeEach((to, from, next) => {
   let statelogin = sessionStorage.getItem("userinfo"); //验证登录状态
   // console.log(statelogin);
-  if (statelogin) {
+  if (statelogin || to.path=="/regist") {
     //判断是否登录
     next();
   } else {
