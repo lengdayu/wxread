@@ -24,7 +24,7 @@
           maxlength="10"
         />
 
-        <el-button @click="login" class="button_regist">点击登录</el-button>
+        <el-button @click="login" class="button_regist" >点击登录</el-button>
         <a @click="routertoregist" class="router_regist" href=""
           >未注册？点击注册</a
         >
@@ -49,6 +49,10 @@ export default {
       uname: "",
       upwd: "",
     };
+  },
+  mounted(){
+    window.addEventListener("keydown",this.KeyDown)
+
   },
   methods: {
     routertoregist() {
@@ -141,6 +145,12 @@ export default {
         //    this.$message.err('信息不能为空');
       }
     },
+    // 模拟键盘触发登录按钮点击
+    KeyDown(e){
+      if (e.keyCode==13){
+        this.login();
+      }
+    }
   },
   computed: {
     ...mapState(["statelogin"]),

@@ -19,10 +19,9 @@
         <a href="" v-show="end" @click="backhome" class="botoom_home">回到主页</a>
         <!-- 读书工具栏 -->
         <div class="gongju">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div class="gbook">书签</div>
+            <div class="gwrite">字体</div>
+            <div class="glight">亮度</div>
         </div>
     </div>
 </template>
@@ -104,6 +103,24 @@ export default {
 }
 </script>
 <style scoped>
+.gongju{
+    position: fixed;
+    top: 50%;
+    right: 29%;
+}
+.gbook :hover{
+    box-shadow:0 0 1px lightgoldenrodyellow;
+    outline: 1px #01eaad;
+}
+.gbook,.gwrite,.glight{
+    width: 80px; height: 30px;
+    background-color: gray;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
 .back{
     display: inline-block;
     margin-left: 5px;
@@ -172,6 +189,7 @@ export default {
     border-bottom: 1px solid #fff;
 }
 .readcontainer{
+    position: relative;
     max-width: 760px;
     box-sizing: border-box;
     padding: 0 80px 40px 80px;
